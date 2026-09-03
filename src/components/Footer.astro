@@ -1,0 +1,54 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="wrap foot">
+    <span class="foot-left"><span class="brand-mark">MS</span>Martín Soria</span>
+    <span>© {year} Martín Soria. Todos los derechos reservados.</span>
+    <span>Hecho en Ulapes, La Rioja 🇦🇷</span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--line-soft);
+    padding: 26px 0;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 680px) {
+    footer {
+      padding-bottom: 84px;
+    }
+  }
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 13.5px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .foot-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--violet), #5b8cff);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+</style>

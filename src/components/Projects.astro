@@ -1,0 +1,160 @@
+---
+import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+---
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title"><span class="chip">▣</span>Proyectos Destacados</h2>
+      <a class="link-arrow" href="https://github.com/MartinSx10" target="_blank" rel="noopener">
+        Ver todos los proyectos →
+      </a>
+    </div>
+
+    <div class="projects-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de la captura">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Cerrar">
+      <svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 72px 0;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .section-title .chip {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--violet) 14%, transparent);
+    color: var(--violet-soft);
+    font-size: 16px;
+  }
+  .link-arrow {
+    font-size: 14px;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+  .link-arrow:hover {
+    color: var(--violet-soft);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  @media (max-width: 960px) {
+    .projects-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 680px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    section {
+      padding: 56px 0;
+    }
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(4, 4, 10, 0.88);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .lightbox.open {
+    display: flex;
+  }
+  .lightbox img {
+    max-width: min(1100px, 100%);
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+</style>
+
+<script>
+  const lightbox = document.getElementById("lightbox")!;
+  const lightboxImg = document.getElementById("lightboxImg") as HTMLImageElement;
+  const closeBtn = document.getElementById("lightboxClose")!;
+
+  const openLightbox = (src: string, alt: string) => {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeLightbox = () => {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+    lightboxImg.src = "";
+  };
+
+  document.querySelectorAll<HTMLButtonElement>(".shot-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const src = btn.dataset.lightboxSrc;
+      const alt = btn.dataset.lightboxAlt ?? "";
+      if (src) openLightbox(src, alt);
+    });
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
+</script>

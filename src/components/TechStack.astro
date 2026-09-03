@@ -1,0 +1,86 @@
+---
+const techs = [
+  { name: "Angular", letter: "A", color: "#dd0031" },
+  { name: "Next.js", letter: "N", color: "#333333" },
+  { name: "TypeScript", letter: "TS", color: "#3178c6" },
+  { name: "Tailwind CSS", letter: "~", color: "#0ea5e9" },
+  { name: "NestJS", letter: "N", color: "#e0234e" },
+  { name: "Node.js", letter: "JS", color: "#3c873a" },
+  { name: "Prisma", letter: "P", color: "#2d3748" },
+  { name: "PostgreSQL", letter: "PG", color: "#336791" },
+  { name: "Docker", letter: "D", color: "#2496ed" },
+  { name: "Azure", letter: "Az", color: "#0078d4" },
+  { name: "Git", letter: "G", color: "#f05033" },
+];
+---
+
+<div class="wrap tech">
+  <div class="tech-panel">
+    <h2>Tecnologías con las que trabajo</h2>
+    <div class="tech-list">
+      {
+        techs.map((t) => (
+          <span class="tech-item">
+            <span class="tech-dot" style={`background:${t.color}`}>
+              {t.letter}
+            </span>
+            {t.name}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .tech {
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .tech-panel {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 20px;
+    padding: 32px 36px;
+  }
+  .tech-panel h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 26px;
+    text-align: center;
+  }
+  .tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 18px;
+  }
+  .tech-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--line-soft);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .tech-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    color: #fff;
+  }
+
+  @media (max-width: 680px) {
+    .tech-panel {
+      padding: 26px 22px;
+    }
+  }
+</style>

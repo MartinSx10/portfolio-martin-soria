@@ -1,0 +1,70 @@
+---
+---
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Volver al inicio">
+  <svg class="i" viewBox="0 0 24 24"><path d="M12 19V5m0 0-6 6m6-6 6 6" /></svg>
+</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    z-index: 60;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--card) 92%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.15s;
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .back-to-top:hover {
+    border-color: var(--violet-soft);
+    color: var(--violet-soft);
+  }
+
+  @media (max-width: 680px) {
+    .back-to-top {
+      right: 14px;
+      bottom: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById("backToTop")!;
+  const THRESHOLD = 480;
+
+  const onScroll = () => {
+    btn.classList.toggle("visible", window.scrollY > THRESHOLD);
+  };
+  document.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
