@@ -106,7 +106,7 @@ export const projects: Project[] = [
     name: "SADDI STORE",
     tag: "E-commerce",
     description:
-      "Tienda online de una estación de servicio con dos sucursales, carrito de compras y pagos con Mercado Pago. En producción.",
+      "Tienda online de una estación de servicio con dos sucursales, carrito de compras y pagos con Mercado Pago.",
     stack: ["Next.js", "NestJS", "Prisma", "Mercado Pago"],
     treatment: "screenshot",
     status: "development",
